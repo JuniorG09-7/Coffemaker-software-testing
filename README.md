@@ -1,130 +1,71 @@
-# ☕ CoffeeMaker — Testes de Software
+# CoffeeMaker - Unit Testing
 
-Projeto final do curso **Introduction to Software Testing** (Coursera), aplicado ao sistema pedagógico **CoffeeMaker** — uma máquina de café virtual desenvolvida em Java.
+Projeto final do curso Introduction to Software Testing (Coursera), aplicando testes unitários no sistema CoffeeMaker — uma máquina de café virtual desenvolvida em Java.
 
-O objetivo foi colocar em prática três pilares fundamentais de testes de software: testes unitários com JUnit, medição de cobertura com JaCoCo e isolamento de dependências com Mockito.
+O CoffeeMaker é um sistema que permite cadastrar receitas, gerenciar ingredientes e simular a compra de cafés. O código-fonte da aplicação foi fornecido pelo curso, e minha responsabilidade foi implementar os testes.
 
----
+## O que foi testado
 
-## 📚 O que foi implementado
+- Adição de receitas válidas e inválidas
+- Compra de café com saldo suficiente e insuficiente
+- Manipulação de ingredientes no estoque
+- Tratamento de exceções esperadas
+- Isolamento da classe CoffeeMaker do RecipeBook usando mocks
 
-### 🧪 JUnit — Testes Unitários
-Testes que verificam o comportamento da aplicação em diferentes cenários: adicionar receitas válidas e inválidas, comprar café com saldo suficiente ou insuficiente, manipular ingredientes e tratar exceções esperadas.
+## Técnicas aplicadas
 
-### 📊 JaCoCo — Cobertura de Branches
-Análise de cobertura de ramificações (branch coverage): garantir que cada `if` do código seja testado nos dois caminhos possíveis (verdadeiro e falso), não apenas em linhas executadas.
+**JUnit 4** — testes unitários que verificam o comportamento da aplicação em diferentes cenários, garantindo que cada funcionalidade retorna o resultado esperado.
 
-### 🎭 Mockito — Mocks e Isolamento
-Uso de objetos simulados (mocks) para isolar a classe `CoffeeMaker` da implementação real do `RecipeBook`. Isso permite testar o comportamento da máquina de café de forma controlada, verificando as interações entre os objetos.
+**JaCoCo** — medição de cobertura de branches: garante que cada `if` do código seja testado nos dois caminhos possíveis (verdadeiro e falso), não apenas que as linhas foram executadas.
 
----
+**Mockito** — uso de objetos simulados (mocks) para isolar a classe CoffeeMaker da implementação real do RecipeBook, permitindo testar o comportamento da máquina de forma controlada.
 
-## 🗂️ Estrutura do Projeto
+## Estrutura do projeto
 
-```
-CoffeeMaker_Mock_Assign/
-├── src/
-│   ├── main/java/          # Código-fonte da aplicação (não modificar)
-│   │   └── edu/ncsu/csc326/coffeemaker/
-│   │       ├── CoffeeMaker.java
-│   │       ├── Recipe.java
-│   │       ├── RecipeBook.java (interface)
-│   │       ├── Inventory.java
-│   │       └── exceptions/
-│   └── test/java/          # Código de testes (implementado por mim)
-│       └── edu/ncsu/csc326/coffeemaker/
-│           └── CoffeeMakerTest.java
-├── build/
-│   └── reports/
-│       ├── tests/test/index.html     # Relatório JUnit
-│       └── jacoco/test/html/index.html  # Relatório de cobertura
-├── build.gradle            # Configuração do build (Gradle)
-├── gradlew                 # Script de build para Linux/macOS
-├── gradlew.bat             # Script de build para Windows
-├── Requirements-CoffeeMaker.pdf
-├── ClassDiagram-CoffeeMaker.pdf
-└── SequenceDiagram-CoffeeMaker.pdf
-```
+src/
+├── main/java/          # Código-fonte da aplicação (fornecido pelo curso)
+└── test/java/          # Testes implementados por mim
+    └── CoffeeMakerTest.java
+build/
+└── reports/
+    ├── tests/test/index.html        # Relatório JUnit
+    └── jacoco/test/html/index.html  # Relatório de cobertura
 
----
+## Como rodar
 
-## ⚙️ Pré-requisitos
+**Pré-requisito:** Java 8 JDK. O projeto não é compatível com versões superiores. Certifique-se de que a variável `JAVA_HOME` aponta para o Java 8.
 
-Antes de rodar o projeto, você precisa ter instalado:
+Clone o repositório:
 
-- **Java 8 JDK** — [Download aqui](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-
-> ⚠️ O projeto **não é compatível com Java 9 ou superior**. Certifique-se de que a variável de ambiente `JAVA_HOME` aponta para o Java 8.
-
----
-
-## 🚀 Como rodar o projeto
-
-### Pelo terminal (recomendado)
-
-**1. Clone o repositório**
-```bash
 git clone https://github.com/JuniorG09-7/Coffemaker-software-testing.git
 cd Coffemaker-software-testing
-```
 
-**2. Execute o build completo**
+Execute o build:
 
-No Windows:
-```bash
-gradlew.bat build
-```
+Windows: gradlew.bat build
 
-No Linux/macOS:
-```bash
-./gradlew build
-```
+Linux/macOS: ./gradlew build
 
-Esse comando vai:
-- Compilar o código-fonte
-- Executar todos os testes
-- Gerar os relatórios de cobertura
+O comando vai compilar o código, executar todos os testes e gerar os relatórios automaticamente.
 
----
+## Visualizando os relatórios
 
-## 📈 Visualizando os Relatórios
+Após o build, abra os arquivos no navegador:
 
-Após o build, os relatórios são gerados automaticamente na pasta `build/reports/`.
-
-### Relatório JUnit (resultado dos testes)
-Abra no navegador:
-```
+**Relatório JUnit** — mostra quais testes passaram e quais falharam:
 build/reports/tests/test/index.html
-```
 
-Você verá quais testes passaram ✅, quais falharam ❌ e o tempo de execução de cada um.
-
-### Relatório JaCoCo (cobertura de código)
-Abra no navegador:
-```
+**Relatório JaCoCo** — mostra a porcentagem de cobertura por classe e branch:
 build/reports/jacoco/test/html/index.html
-```
 
-Você verá a porcentagem de cobertura por classe, método e branch (ramificação). Classes em verde têm boa cobertura; em vermelho, precisam de mais testes.
+No Windows, arraste o arquivo `.html` direto para o navegador ou cole o caminho precedido de `file:///`.
 
-> 💡 **Dica:** No Windows, você pode arrastar o arquivo `.html` direto para o navegador, ou colar o caminho completo na barra de endereço precedido de `file:///`.
-
----
-
-## 🔍 Tecnologias utilizadas
+## Tecnologias
 
 | Ferramenta | Versão | Finalidade |
-|------------|--------|------------|
-| Java       | 8      | Linguagem principal |
-| JUnit      | 4      | Testes unitários |
-| JaCoCo     | —      | Cobertura de código |
-| Mockito    | —      | Mocks e stubs |
-| Gradle     | —      | Build e automação |
-
----
-
-## 👨‍💻 Autor
-
-**José Gicivaldo**
-Curso: Introduction to Software Testing — Coursera
-Repositório: [github.com/JuniorG09-7/Coffemaker-software-testing](https://github.com/JuniorG09-7/Coffemaker-software-testing)
+|---|---|---|
+| Java | 8 | Linguagem principal |
+| JUnit | 4 | Testes unitários |
+| JaCoCo | — | Cobertura de código |
+| Mockito | — | Mocks e isolamento |
+| Gradle | — | Build e automação |
